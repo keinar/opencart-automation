@@ -1,7 +1,7 @@
 {
   "config": {
-    "configFile": "c:\\Users\\Keinar\\Desktop\\opencart-automation\\playwright.config.ts",
-    "rootDir": "c:/Users/Keinar/Desktop/opencart-automation/tests",
+    "configFile": "C:\\Users\\Keinar\\Desktop\\opencart-automation\\playwright.config.ts",
+    "rootDir": "C:/Users/Keinar/Desktop/opencart-automation/tests",
     "forbidOnly": false,
     "fullyParallel": true,
     "globalSetup": null,
@@ -20,17 +20,27 @@
         null
       ],
       [
+        "html",
+        null
+      ],
+      [
         "list",
         null
       ],
       [
-        "c:\\Users\\Keinar\\Desktop\\opencart-automation\\node_modules\\allure-playwright\\dist\\index.js",
+        "C:\\Users\\Keinar\\Desktop\\opencart-automation\\node_modules\\allure-playwright\\dist\\index.js",
         null
       ],
       [
         "json",
         {
           "outputFile": "test-results.json"
+        }
+      ],
+      [
+        "html",
+        {
+          "outputFile": "test-results.html"
         }
       ]
     ],
@@ -41,12 +51,12 @@
     "quiet": false,
     "projects": [
       {
-        "outputDir": "c:/Users/Keinar/Desktop/opencart-automation/test-results",
+        "outputDir": "C:/Users/Keinar/Desktop/opencart-automation/test-results",
         "repeatEach": 1,
         "retries": 0,
         "id": "chromium",
         "name": "chromium",
-        "testDir": "c:/Users/Keinar/Desktop/opencart-automation/tests",
+        "testDir": "C:/Users/Keinar/Desktop/opencart-automation/tests",
         "testIgnore": [],
         "testMatch": [
           "**/*.@(spec|test).?(c|m)[jt]s?(x)"
@@ -62,61 +72,130 @@
   },
   "suites": [
     {
-      "title": "example.spec.ts",
-      "file": "example.spec.ts",
+      "title": "topMenuTests\\topMenuTests.spec.ts",
+      "file": "topMenuTests/topMenuTests.spec.ts",
       "column": 0,
       "line": 0,
-      "specs": [
+      "specs": [],
+      "suites": [
         {
-          "title": "get started link",
-          "ok": true,
-          "tags": [
-            "smoke"
-          ],
-          "tests": [
+          "title": "Validate top menu items",
+          "file": "topMenuTests/topMenuTests.spec.ts",
+          "line": 5,
+          "column": 6,
+          "specs": [
             {
-              "timeout": 30000,
-              "annotations": [],
-              "expectedStatus": "passed",
-              "projectId": "chromium",
-              "projectName": "chromium",
-              "results": [
+              "title": "Select currency from dropdown",
+              "ok": false,
+              "tags": [],
+              "tests": [
                 {
-                  "workerIndex": 0,
-                  "status": "passed",
-                  "duration": 2431,
-                  "errors": [],
-                  "stdout": [],
-                  "stderr": [],
-                  "retry": 0,
-                  "startTime": "2024-03-04T20:07:02.696Z",
-                  "attachments": [
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
                     {
-                      "name": "screenshot",
-                      "contentType": "image/png",
-                      "path": "c:\\Users\\Keinar\\Desktop\\opencart-automation\\test-results\\example-get-started-link-chromium\\test-finished-1.png"
+                      "workerIndex": 0,
+                      "status": "failed",
+                      "duration": 5502,
+                      "error": {
+                        "message": "TypeError: Cannot read properties of undefined (reading 'selectCurrency')",
+                        "stack": "TypeError: Cannot read properties of undefined (reading 'selectCurrency')\n    at C:\\Users\\Keinar\\Desktop\\opencart-automation\\tests\\topMenuTests\\topMenuTests.spec.ts:16:22\n    at C:\\Users\\Keinar\\Desktop\\opencart-automation\\tests\\topMenuTests\\topMenuTests.spec.ts:15:10",
+                        "location": {
+                          "file": "C:\\Users\\Keinar\\Desktop\\opencart-automation\\tests\\topMenuTests\\topMenuTests.spec.ts",
+                          "column": 22,
+                          "line": 16
+                        },
+                        "snippet": "\u001b[0m \u001b[90m 14 |\u001b[39m   test(\u001b[32m\"Select currency from dropdown\"\u001b[39m\u001b[33m,\u001b[39m \u001b[36masync\u001b[39m ({ page }) \u001b[33m=>\u001b[39m {\u001b[0m\n\u001b[0m \u001b[90m 15 |\u001b[39m     test\u001b[33m.\u001b[39mstep(\u001b[32m\"Select Pound currency\"\u001b[39m\u001b[33m,\u001b[39m \u001b[36masync\u001b[39m () \u001b[33m=>\u001b[39m {\u001b[0m\n\u001b[0m\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 16 |\u001b[39m       \u001b[36mawait\u001b[39m homePage\u001b[33m.\u001b[39mselectCurrency(\u001b[32m\"£ Pound Sterling\"\u001b[39m)\u001b[0m\n\u001b[0m \u001b[90m    |\u001b[39m                      \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m 17 |\u001b[39m     })\u001b[0m\n\u001b[0m \u001b[90m 18 |\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m 19 |\u001b[39m     test\u001b[33m.\u001b[39mstep(\u001b[32m\"Select US Dollar currency\"\u001b[39m\u001b[33m,\u001b[39m \u001b[36masync\u001b[39m () \u001b[33m=>\u001b[39m {\u001b[0m"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "C:\\Users\\Keinar\\Desktop\\opencart-automation\\tests\\topMenuTests\\topMenuTests.spec.ts",
+                            "column": 22,
+                            "line": 16
+                          },
+                          "message": "TypeError: Cannot read properties of undefined (reading 'selectCurrency')\n\n\u001b[0m \u001b[90m 14 |\u001b[39m   test(\u001b[32m\"Select currency from dropdown\"\u001b[39m\u001b[33m,\u001b[39m \u001b[36masync\u001b[39m ({ page }) \u001b[33m=>\u001b[39m {\u001b[0m\n\u001b[0m \u001b[90m 15 |\u001b[39m     test\u001b[33m.\u001b[39mstep(\u001b[32m\"Select Pound currency\"\u001b[39m\u001b[33m,\u001b[39m \u001b[36masync\u001b[39m () \u001b[33m=>\u001b[39m {\u001b[0m\n\u001b[0m\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 16 |\u001b[39m       \u001b[36mawait\u001b[39m homePage\u001b[33m.\u001b[39mselectCurrency(\u001b[32m\"£ Pound Sterling\"\u001b[39m)\u001b[0m\n\u001b[0m \u001b[90m    |\u001b[39m                      \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m 17 |\u001b[39m     })\u001b[0m\n\u001b[0m \u001b[90m 18 |\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m 19 |\u001b[39m     test\u001b[33m.\u001b[39mstep(\u001b[32m\"Select US Dollar currency\"\u001b[39m\u001b[33m,\u001b[39m \u001b[36masync\u001b[39m () \u001b[33m=>\u001b[39m {\u001b[0m\n\n\u001b[2m    at C:\\Users\\Keinar\\Desktop\\opencart-automation\\tests\\topMenuTests\\topMenuTests.spec.ts:16:22\u001b[22m\n\u001b[2m    at C:\\Users\\Keinar\\Desktop\\opencart-automation\\tests\\topMenuTests\\topMenuTests.spec.ts:15:10\u001b[22m"
+                        }
+                      ],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "steps": [
+                        {
+                          "title": "Select Pound currency",
+                          "duration": 2,
+                          "error": {
+                            "message": "TypeError: Cannot read properties of undefined (reading 'selectCurrency')",
+                            "stack": "TypeError: Cannot read properties of undefined (reading 'selectCurrency')\n    at C:\\Users\\Keinar\\Desktop\\opencart-automation\\tests\\topMenuTests\\topMenuTests.spec.ts:16:22\n    at C:\\Users\\Keinar\\Desktop\\opencart-automation\\tests\\topMenuTests\\topMenuTests.spec.ts:15:10",
+                            "location": {
+                              "file": "C:\\Users\\Keinar\\Desktop\\opencart-automation\\tests\\topMenuTests\\topMenuTests.spec.ts",
+                              "column": 22,
+                              "line": 16
+                            },
+                            "snippet": "\u001b[0m \u001b[90m 14 |\u001b[39m   test(\u001b[32m\"Select currency from dropdown\"\u001b[39m\u001b[33m,\u001b[39m \u001b[36masync\u001b[39m ({ page }) \u001b[33m=>\u001b[39m {\u001b[0m\n\u001b[0m \u001b[90m 15 |\u001b[39m     test\u001b[33m.\u001b[39mstep(\u001b[32m\"Select Pound currency\"\u001b[39m\u001b[33m,\u001b[39m \u001b[36masync\u001b[39m () \u001b[33m=>\u001b[39m {\u001b[0m\n\u001b[0m\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 16 |\u001b[39m       \u001b[36mawait\u001b[39m homePage\u001b[33m.\u001b[39mselectCurrency(\u001b[32m\"£ Pound Sterling\"\u001b[39m)\u001b[0m\n\u001b[0m \u001b[90m    |\u001b[39m                      \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m 17 |\u001b[39m     })\u001b[0m\n\u001b[0m \u001b[90m 18 |\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m 19 |\u001b[39m     test\u001b[33m.\u001b[39mstep(\u001b[32m\"Select US Dollar currency\"\u001b[39m\u001b[33m,\u001b[39m \u001b[36masync\u001b[39m () \u001b[33m=>\u001b[39m {\u001b[0m"
+                          }
+                        },
+                        {
+                          "title": "Select US Dollar currency",
+                          "duration": 2,
+                          "error": {
+                            "message": "TypeError: Cannot read properties of undefined (reading 'selectCurrency')",
+                            "stack": "TypeError: Cannot read properties of undefined (reading 'selectCurrency')\n    at C:\\Users\\Keinar\\Desktop\\opencart-automation\\tests\\topMenuTests\\topMenuTests.spec.ts:20:22\n    at C:\\Users\\Keinar\\Desktop\\opencart-automation\\tests\\topMenuTests\\topMenuTests.spec.ts:19:10",
+                            "location": {
+                              "file": "C:\\Users\\Keinar\\Desktop\\opencart-automation\\tests\\topMenuTests\\topMenuTests.spec.ts",
+                              "column": 22,
+                              "line": 20
+                            },
+                            "snippet": "\u001b[0m \u001b[90m 18 |\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m 19 |\u001b[39m     test\u001b[33m.\u001b[39mstep(\u001b[32m\"Select US Dollar currency\"\u001b[39m\u001b[33m,\u001b[39m \u001b[36masync\u001b[39m () \u001b[33m=>\u001b[39m {\u001b[0m\n\u001b[0m\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 20 |\u001b[39m       \u001b[36mawait\u001b[39m homePage\u001b[33m.\u001b[39mselectCurrency(\u001b[32m\"$ US Dollar\"\u001b[39m)\u001b[0m\n\u001b[0m \u001b[90m    |\u001b[39m                      \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m 21 |\u001b[39m     })\u001b[0m\n\u001b[0m \u001b[90m 22 |\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m 23 |\u001b[39m     test\u001b[33m.\u001b[39mstep(\u001b[32m\"Select Euro currency\"\u001b[39m\u001b[33m,\u001b[39m \u001b[36masync\u001b[39m () \u001b[33m=>\u001b[39m {\u001b[0m"
+                          }
+                        },
+                        {
+                          "title": "Select Euro currency",
+                          "duration": 2,
+                          "error": {
+                            "message": "TypeError: Cannot read properties of undefined (reading 'selectCurrency')",
+                            "stack": "TypeError: Cannot read properties of undefined (reading 'selectCurrency')\n    at C:\\Users\\Keinar\\Desktop\\opencart-automation\\tests\\topMenuTests\\topMenuTests.spec.ts:24:22\n    at C:\\Users\\Keinar\\Desktop\\opencart-automation\\tests\\topMenuTests\\topMenuTests.spec.ts:23:10",
+                            "location": {
+                              "file": "C:\\Users\\Keinar\\Desktop\\opencart-automation\\tests\\topMenuTests\\topMenuTests.spec.ts",
+                              "column": 22,
+                              "line": 24
+                            },
+                            "snippet": "\u001b[0m \u001b[90m 22 |\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m 23 |\u001b[39m     test\u001b[33m.\u001b[39mstep(\u001b[32m\"Select Euro currency\"\u001b[39m\u001b[33m,\u001b[39m \u001b[36masync\u001b[39m () \u001b[33m=>\u001b[39m {\u001b[0m\n\u001b[0m\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 24 |\u001b[39m       \u001b[36mawait\u001b[39m homePage\u001b[33m.\u001b[39mselectCurrency(\u001b[32m\"€ Euro\"\u001b[39m)\u001b[0m\n\u001b[0m \u001b[90m    |\u001b[39m                      \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m 25 |\u001b[39m     })\u001b[0m\n\u001b[0m \u001b[90m 26 |\u001b[39m   })\u001b[0m\n\u001b[0m \u001b[90m 27 |\u001b[39m })\u001b[0m"
+                          }
+                        }
+                      ],
+                      "startTime": "2024-03-06T14:42:33.424Z",
+                      "attachments": [],
+                      "errorLocation": {
+                        "file": "C:\\Users\\Keinar\\Desktop\\opencart-automation\\tests\\topMenuTests\\topMenuTests.spec.ts",
+                        "column": 22,
+                        "line": 16
+                      }
                     }
-                  ]
+                  ],
+                  "status": "unexpected"
                 }
               ],
-              "status": "expected"
+              "id": "c3f66a33396fbde72921-a0e15d0d01b8f6a23316",
+              "file": "topMenuTests/topMenuTests.spec.ts",
+              "line": 14,
+              "column": 7
             }
-          ],
-          "id": "a30a6eba6312f6b87ea5-274e97907a6e3638a22f",
-          "file": "example.spec.ts",
-          "line": 10,
-          "column": 5
+          ]
         }
       ]
     }
   ],
   "errors": [],
   "stats": {
-    "startTime": "2024-03-04T20:07:02.218Z",
-    "duration": 3637.8949999999995,
-    "expected": 1,
+    "startTime": "2024-03-06T14:42:32.986Z",
+    "duration": 6714.393,
+    "expected": 0,
     "skipped": 0,
-    "unexpected": 0,
+    "unexpected": 1,
     "flaky": 0
   }
 }
