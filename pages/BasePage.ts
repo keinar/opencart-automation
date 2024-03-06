@@ -24,7 +24,8 @@ export abstract class BasePage {
 
   public async validatePageUrlIncludes(pageUrl: string) {
     await test.step(`Validating that a correct value of URL is includes ${pageUrl}`, async () => {
-      expect(this.page.url().includes(`${pageUrl}`)).toBeTruthy()
+      const urlPattern = new RegExp(pageUrl)
+      await expect(this.page).toHaveURL(urlPattern)
     })
   }
 
@@ -40,6 +41,7 @@ export abstract class BasePage {
 
   protected async clickElement(element: Locator) {
     await test.step(`Clicking the '${element}' element`, async () => {
+      await element.waitFor({ state: "visible" })
       await element.click()
     })
   }
@@ -73,21 +75,26 @@ export abstract class BasePage {
     await this.page.locator(`[class="dropdown-menu show"] li a:has-text("${currency}")`).click()
   }
 
+  /**
+   * Navigates to a specified category and optionally a subcategory within an e-commerce platform.
+   * @param {string} categoryName - The name of the main category to navigate to.
+   * @param {string} [subCategoryName] - The name of the subcategory to navigate to. If 'Show All' is passed, all categories will be displayed. This parameter is optional.
+   */
   public async navigateToCategory(categoryName: string, subCategoryName?: string) {
-    await this.categoryMenuItems.locator(` > a:has-text("${categoryName}")`).click()
+    await this.clickElement(this.categoryMenuItems.locator(` > a:has-text("${categoryName}")`))
     if (subCategoryName) {
-      await this.dropDownMenu.locator(`li:has-text("${subCategoryName}")`).click()
+      await this.clickElement(this.dropDownMenu.locator(`a:has-text("${subCategoryName}")`))
     }
+    await this.validatePageUrlIncludes("product/category")
   }
 
   // Handle Cloudflare verification
   public async handleVerificationPage() {
     await this.page.goto(ApplicationURL.BASE_URL)
-    await this.page.waitForTimeout(4000)
+    await this.page.waitForTimeout(5000)
     if (await this.page.locator('[id="challenge-running"]').isVisible()) {
       await this.page.frameLocator('iframe[title="Widget containing a Cloudflare security challenge"]').getByLabel("Verify you are human").check()
-      await this.page.waitForTimeout(4000)
-
+      await this.page.waitForTimeout(5000)
       if (await this.page.locator('[id="challenge-running"]').isVisible()) {
         await this.handleVerificationPage()
       }

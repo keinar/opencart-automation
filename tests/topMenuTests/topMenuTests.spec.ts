@@ -23,4 +23,8 @@ test.describe("Validate top menu items", () => {
       await homePage.selectCurrency("€ Euro")
     })
   })
+
+  // test("Select language from dropdown", async ({ page }) => {
+
+  // })
 })
