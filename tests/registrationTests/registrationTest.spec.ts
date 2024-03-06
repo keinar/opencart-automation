@@ -1,5 +1,5 @@
 import { test } from "@playwright/test"
-import RegistrationPage from "../../Pages/RegistrationPage"
+import RegistrationPage from "../../pages/RegistrationPage"
 import ApplicationURL from "../../helpers/ApplicationURL"
 
 test.describe("Register to Application - positive and negative scenarios", () => {
