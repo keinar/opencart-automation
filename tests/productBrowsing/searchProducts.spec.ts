@@ -18,4 +18,10 @@ test.describe("Search for products", () => {
       await searchPage.searchTextFromHeader("MacBook")
     })
   })
+
+  test("Empty search", async ({ page }) => {
+    test.step("Search for product from header", async () => {
+      await searchPage.searchTextFromHeader("")
+    })
+  })
 })

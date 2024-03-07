@@ -10,6 +10,7 @@ export abstract class BasePage {
   protected alertSuccessMsg: Locator
   protected shoppingCartButton: Locator
   protected shoppingCartModal: Locator
+  protected pageTitle: Locator
 
   constructor(protected page: Page) {
     this.searchField = page.locator('[id="search"] input')
@@ -20,6 +21,7 @@ export abstract class BasePage {
     this.alertSuccessMsg = page.locator('[class="alert alert-success alert-dismissible"]')
     this.shoppingCartButton = page.locator('[class="btn btn-inverse btn-block dropdown-toggle"]')
     this.shoppingCartModal = page.locator('[class="dropdown-menu dropdown-menu-right show"]')
+    this.pageTitle = page.locator("h1")
   }
 
   public async validatePageUrl(url: string) {
@@ -36,7 +38,7 @@ export abstract class BasePage {
   }
 
   public async validatePageTitle(title: string) {
-    await this.validateElementText(this.page.locator("h1"), title)
+    await this.validateElementText(this.pageTitle, title)
   }
 
   protected async validateElementText(element: Locator, expectedText: string) {

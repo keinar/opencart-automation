@@ -2,7 +2,6 @@ import { Locator, Page } from "@playwright/test"
 import { BasePage } from "./BasePage"
 
 export default class CheckoutPage extends BasePage {
-  private checkoutPageTitle: Locator
   private firstName: Locator
   private lastName: Locator
   private address: Locator
@@ -15,7 +14,6 @@ export default class CheckoutPage extends BasePage {
 
   constructor(protected page: Page) {
     super(page)
-    this.checkoutPageTitle = page.locator("h1")
     this.firstName = page.locator('[name="firstname"]')
     this.lastName = page.locator('[name="lastname"]')
     this.address = page.locator('[name="address_1"]')
@@ -25,10 +23,6 @@ export default class CheckoutPage extends BasePage {
     this.submitAddressButton = page.locator('[id="button-payment-address"]')
     this.paymentMethodDropdown = page.locator('[id="input-payment-method"]')
     this.confirmPaymentButton = page.locator('[class="text-end"] button')
-  }
-
-  public async validatePageTitle(title: string) {
-    await this.validateElementText(this.checkoutPageTitle, title)
   }
 
   public async fillCheckoutForm(firstname: string, lastname: string, address: string, city: string, country: string, state: string) {

@@ -6,10 +6,6 @@ export default class ProductPage extends BasePage {
     super(page)
   }
 
-  //validate title of product
-
-  public async validatePageTitle(title: string) {}
-
   // add to wish list button / compare button
 
   public async addToWishList() {}
