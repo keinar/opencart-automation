@@ -15,7 +15,7 @@ test.describe("Login to Application scenario", () => {
   test("Negative login - invalid credentials", async ({ page }) => {
     await myAccountPage.navigateTopMenu("My Account", "Login")
     await myAccountPage.loginToApplication("negative@gmail.com", "1234")
-    await myAccountPage.validateAlertMessage(AlertErrorMessage.E_MAIL_VALIDATION)
+    await myAccountPage.validateAlertWarningMessage(AlertErrorMessage.E_MAIL_VALIDATION)
     await myAccountPage.validatePageUrlIncludes("account/account")
   })
 })

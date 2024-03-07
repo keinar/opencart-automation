@@ -21,7 +21,7 @@ export default class MyAccountPage extends BasePage {
     await this.loginButton.click()
   }
 
-  public async validateAlertMessage(message: string) {
+  public async validateAlertWarningMessage(message: string) {
     await expect(this.alertWarningMsg).toContainText(message)
   }
 

@@ -21,7 +21,7 @@ test.describe("Register to Application - negative scenarios", () => {
     await registrationPage.registerToApplication(faker.person.firstName(), faker.person.lastName(), faker.internet.email(), faker.internet.password())
     await registrationPage.acceptNewsletterSubscription(true)
     await registrationPage.submitRegistration()
-    await registrationPage.validateAlertMessage(FieldErrorMessage.PRIVACY_POLICY_VALIDATION)
+    await registrationPage.validateAlertWarningMessage(FieldErrorMessage.PRIVACY_POLICY_VALIDATION)
   })
 
   test("Negative registration, invalid email", async () => {

@@ -1,22 +1,61 @@
 import { test, expect } from "@playwright/test"
-import RegistrationPage from "../Pages/RegistrationPage"
-import MyAccountPage from "../pages/MyAccountPage"
+import HomePage from "../pages/HomePage"
+import ProductCategoryPage from "../pages/ProductCategoryPage"
+import ApplicationURL from "../helpers/ApplicationURL"
+import CartPage from "../pages/CartPage"
+import CheckoutPage from "../pages/CheckoutPage"
+import { faker } from "@faker-js/faker"
 
-test.describe("Sanity test suite", () => {
+test.describe("Sanity E2E Tests for OpenCart Demo Store", () => {
+  let homePage: HomePage
+  let productCategoryPage: ProductCategoryPage
+  let cartPage: CartPage
+  let checkoutPage: CheckoutPage
+
   test.beforeEach(async ({ page }) => {
-    const myAccountPage = new MyAccountPage(page)
-    await page.goto("https://demo.opencart.com/")
-    await myAccountPage.handleVerificationPage()
+    homePage = new HomePage(page)
+    productCategoryPage = new ProductCategoryPage(page)
+    cartPage = new CartPage(page)
+    await page.goto(ApplicationURL.BASE_URL)
+    await homePage.openHomePage()
   })
 
-  test("Search for PC", { tag: ["@critical-bug"] }, async ({ page }) => {
-    // await basePage.searchForText("PC")
-    await expect(page).toHaveURL("https://demo.opencart.com/index.php?route=product/search&search=PC")
-    // await expect(page).toHaveURL("https://demo.opencart.com/error.html")
-  })
+  test("Complete E2E Sanity Check", async ({ page }) => {
+    test.step("validate shopping cart count is empty", async () => {
+      await homePage.validateShoppingCartCount(0)
+    })
 
-  test("Select currency from dropdown", async ({ page }) => {
-    // const basePage = new BasePage(page)
-    // await basePage.changeCurrency("€")
+    test.step("add featured product to cart", async () => {
+      await homePage.addFeaturedProductToCart("MacBook")
+      await homePage.validateAlertSuccessMessage("MacBook", "shopping cart")
+    })
+
+    test.step("validate shopping cart count is 1", async () => {
+      await homePage.validateShoppingCartCount(1)
+    })
+
+    test.step("open shopping cart modal and validate product added", async () => {
+      await homePage.clickToOpenShoppingCart()
+      await homePage.validateProductOnCartModal("MacBook")
+    })
+
+    test.step("navigate to cart page from shopping cart modal", async () => {
+      await homePage.navigateToCartFromCartModal()
+      await cartPage.validatePageTitle("Shopping Cart")
+    })
+
+    test.step("validate product on cart page and proceed to checkout", async () => {
+      await cartPage.validateProductOnCartTable("MacBook")
+      await cartPage.clickProcceedToCheckoutButton()
+      await checkoutPage.validatePageTitle("Checkout")
+    })
+
+    test.step("fill checkout form", async () => {
+      await checkoutPage.fillCheckoutForm(faker.person.firstName(), faker.person.lastName(), faker.location.streetAddress(), faker.location.city(), faker.location.country(), faker.location.state())
+      await checkoutPage.clickSubmitAddressButton()
+      await checkoutPage.selectPaymentMethod("Bank Transfer")
+      await checkoutPage.clickConfirmPaymentButton()
+      await checkoutPage.validatePageTitle("Order Confirmation")
+    })
   })
 })

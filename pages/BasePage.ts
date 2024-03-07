@@ -7,6 +7,9 @@ export abstract class BasePage {
   private categoryMenuItems: Locator
   private dropDownMenu: Locator
   protected alertWarningMsg: Locator
+  protected alertSuccessMsg: Locator
+  protected shoppingCartButton: Locator
+  protected shoppingCartModal: Locator
 
   constructor(protected page: Page) {
     this.searchField = page.locator('[id="search"] input')
@@ -14,6 +17,9 @@ export abstract class BasePage {
     this.categoryMenuItems = page.locator('[class="nav navbar-nav"] > li')
     this.dropDownMenu = page.locator('[class="dropdown-menu show"]')
     this.alertWarningMsg = page.locator('[class="alert alert-danger alert-dismissible"]')
+    this.alertSuccessMsg = page.locator('[class="alert alert-success alert-dismissible"]')
+    this.shoppingCartButton = page.locator('[class="btn btn-inverse btn-block dropdown-toggle"]')
+    this.shoppingCartModal = page.locator('[class="dropdown-menu dropdown-menu-right show"]')
   }
 
   public async validatePageUrl(url: string) {
@@ -107,7 +113,48 @@ export abstract class BasePage {
     await this.validatePageUrl(ApplicationURL.BASE_URL || ApplicationURL.BASE_URL + "index.php?route=common/home&language=en-gb")
   }
 
-  public async validateAlertMessage(message: string) {
+  public async validateAlertWarningMessage(message: string) {
     await expect(this.alertWarningMsg).toContainText(message)
+  }
+
+  public async validateAlertSuccessMessage(productName: string, action: string) {
+    const alertSuccessSelector = ".alert.alert-success.alert-dismissible"
+
+    // Retrieve the entire text content of the alert message
+    const alertTextContent = await this.page.textContent(alertSuccessSelector)
+
+    // Construct the expected dynamic parts of the message based on the parameters
+    const expectedMessageStart = `Success: You have added ${productName} to your `
+    const expectedActions = {
+      "shopping cart": "shopping cart",
+      "product comparison": "product comparison",
+      "wish list": "wish list",
+    }
+
+    // Verify the start of the message matches the expected text
+    expect(alertTextContent).toContain(expectedMessageStart)
+
+    // Verify the specific action part of the message matches one of the expected actions
+    expect(alertTextContent).toContain(expectedActions[action])
+  }
+
+  public async validateShoppingCartCount(count: number) {
+    await expect(this.shoppingCartButton).toContainText(count.toString() + "item(s)")
+  }
+
+  public async clickToOpenShoppingCart() {
+    await this.clickElement(this.shoppingCartButton)
+  }
+
+  public async validateProductOnCartModal(productName: string) {
+    await expect(this.shoppingCartModal.locator('[class="text-start"]')).toContainText(productName)
+  }
+
+  public async navigateToCartFromCartModal() {
+    await this.clickElement(this.shoppingCartModal.locator('[class="text-end"]:has-text(" View cart")'))
+  }
+
+  public async navigateToCheckoutFromCartModal() {
+    await this.clickElement(this.shoppingCartModal.locator('[class="text-end"]:has-text(" Checkout")'))
   }
 }
