@@ -22,4 +22,17 @@ export default class ProductCategoryPage extends BasePage {
       await expect(this.categoryTitle).toContainText(mainCategory)
     }
   }
+
+  //sorting filters
+  public async sortByFilter(filter: string) {}
+
+  //pagination
+  public async goToNextPage() {}
+
+  //showing products list / grid view
+  public async changeView(view: string) {}
+
+  // add to cart / add to wish list / compare buttons
+
+  // product item
 }

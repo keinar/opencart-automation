@@ -9,7 +9,7 @@ export abstract class BasePage {
   protected alertWarningMsg: Locator
 
   constructor(protected page: Page) {
-    this.searchField = page.locator('[name="search"]')
+    this.searchField = page.locator('[id="search"] input')
     this.searchButton = page.locator('[class="btn btn-light btn-lg"]')
     this.categoryMenuItems = page.locator('[class="nav navbar-nav"] > li')
     this.dropDownMenu = page.locator('[class="dropdown-menu show"]')
@@ -42,6 +42,7 @@ export abstract class BasePage {
   protected async clickElement(element: Locator) {
     await test.step(`Clicking the '${element}' element`, async () => {
       await element.waitFor({ state: "visible" })
+      await element.scrollIntoViewIfNeeded()
       await element.click()
     })
   }
@@ -52,7 +53,7 @@ export abstract class BasePage {
     })
   }
 
-  public async searchForText(textToFill: string) {
+  public async searchTextFromHeader(textToFill: string) {
     await this.searchField.fill(textToFill)
     await this.searchButton.click()
   }
@@ -99,6 +100,11 @@ export abstract class BasePage {
         await this.handleVerificationPage()
       }
     }
+  }
+
+  public async openHomePage() {
+    await this.handleVerificationPage()
+    await this.validatePageUrl(ApplicationURL.BASE_URL || ApplicationURL.BASE_URL + "index.php?route=common/home&language=en-gb")
   }
 
   public async validateAlertMessage(message: string) {

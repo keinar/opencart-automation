@@ -2,10 +2,10 @@ import { Locator, Page, expect } from "@playwright/test"
 import { BasePage } from "./BasePage"
 
 export default class MyAccountPage extends BasePage {
-  usernameField: Locator
-  passwordField: Locator
-  loginButton: Locator
-  registerButton: Locator
+  private usernameField: Locator
+  private passwordField: Locator
+  private loginButton: Locator
+  private registerButton: Locator
 
   constructor(protected page: Page) {
     super(page)

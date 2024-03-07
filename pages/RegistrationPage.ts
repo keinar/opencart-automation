@@ -24,8 +24,6 @@ export default class RegistrationPage extends BasePage {
   }
 
   public async registerToApplication(firstname: string, lastname: string, email: string, password: string) {
-    await this.navigateTopMenu("My Account", "Register")
-    // await this.handleVerificationPage("register")
     await this.page.waitForSelector('[id="account-register"]', { state: "visible" })
     await this.validatePageTitle("Register Account")
     await this.firstName.fill(firstname)

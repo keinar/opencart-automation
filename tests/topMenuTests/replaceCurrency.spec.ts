@@ -1,7 +1,7 @@
 import test from "@playwright/test"
 import HomePage from "../../pages/HomePage"
 
-test.describe("Validate top menu items", () => {
+test.describe("Currency replacement", () => {
   let homePage: HomePage
 
   test.beforeEach(async ({ page }) => {
@@ -23,8 +23,4 @@ test.describe("Validate top menu items", () => {
       await homePage.selectCurrency("€ Euro")
     })
   })
-
-  // test("Select language from dropdown", async ({ page }) => {
-
-  // })
 })
