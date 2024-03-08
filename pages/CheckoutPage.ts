@@ -1,5 +1,6 @@
 import { Locator, Page } from "@playwright/test"
 import { BasePage } from "./BasePage"
+import CheckoutPageLocators from "./PagesLocators/CheckoutPageLocators"
 
 export default class CheckoutPage extends BasePage {
   private firstName: Locator
@@ -14,15 +15,15 @@ export default class CheckoutPage extends BasePage {
 
   constructor(protected page: Page) {
     super(page)
-    this.firstName = page.locator('[name="firstname"]')
-    this.lastName = page.locator('[name="lastname"]')
-    this.address = page.locator('[name="address_1"]')
-    this.city = page.locator('[name="city"]')
-    this.country = page.locator('[name="country_id"]')
-    this.state = page.locator('[name="zone_id"]')
-    this.submitAddressButton = page.locator('[id="button-payment-address"]')
-    this.paymentMethodDropdown = page.locator('[id="input-payment-method"]')
-    this.confirmPaymentButton = page.locator('[class="text-end"] button')
+    this.firstName = page.locator(CheckoutPageLocators.FIRST_NAME)
+    this.lastName = page.locator(CheckoutPageLocators.LAST_NAME)
+    this.address = page.locator(CheckoutPageLocators.ADDRESS)
+    this.city = page.locator(CheckoutPageLocators.CITY)
+    this.country = page.locator(CheckoutPageLocators.COUNTRY)
+    this.state = page.locator(CheckoutPageLocators.STATE)
+    this.submitAddressButton = page.locator(CheckoutPageLocators.SUBMIT_ADDRESS_BUTTON)
+    this.paymentMethodDropdown = page.locator(CheckoutPageLocators.PAYMENT_METHOD_DROPDOWN)
+    this.confirmPaymentButton = page.locator(CheckoutPageLocators.CONFIRM_PAYMENT_BUTTON)
   }
 
   public async fillCheckoutForm(firstname: string, lastname: string, address: string, city: string, country: string, state: string) {

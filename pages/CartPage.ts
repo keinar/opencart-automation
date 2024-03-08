@@ -1,13 +1,14 @@
 import { Locator, Page } from "@playwright/test"
 import { BasePage } from "./BasePage"
+import CartPageLocators from "./PagesLocators/CartPageLocators"
 
 export default class CartPage extends BasePage {
   private cartTable: Locator
   private procceedToCheckoutButton: Locator
   constructor(protected page: Page) {
     super(page)
-    this.cartTable = page.locator('[class="table table-bordered"]')
-    this.procceedToCheckoutButton = page.locator('[class="float-end"] a')
+    this.cartTable = page.locator(CartPageLocators.CART_TABLE)
+    this.procceedToCheckoutButton = page.locator(CartPageLocators.PROCCEED_TO_CHECKOUT_BUTTON)
   }
 
   public async validateProductOnCartTable(productName: string) {

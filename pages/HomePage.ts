@@ -1,11 +1,17 @@
 import { Locator, Page, expect } from "@playwright/test"
 import { BasePage } from "./BasePage"
+import ApplicationURL from "../helpers/ApplicationURL"
 
 export default class HomePage extends BasePage {
   private featuredProducts: Locator
   constructor(protected page: Page) {
     super(page)
     this.featuredProducts = page.locator('[class="product-thumb"]')
+  }
+
+  public async openHomePage() {
+    await this.handleVerificationPage()
+    await this.validatePageUrl(ApplicationURL.BASE_URL || ApplicationURL.BASE_URL + "index.php?route=common/home&language=en-gb")
   }
 
   public async addFeaturedProductToCart(productTitle: string) {

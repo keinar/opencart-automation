@@ -3,18 +3,24 @@ import RegistrationPage from "../../pages/RegistrationPage"
 import ApplicationURL from "../../helpers/ApplicationURL"
 import { faker } from "@faker-js/faker"
 import FieldErrorMessage from "../../helpers/FieldErrorMessage"
+import HomePage from "../../pages/HomePage"
+import HeaderCmp from "../../components/HeaderCmp"
 
 test.describe("Register to Application - negative scenarios", () => {
   let registrationPage: RegistrationPage
+  let homePage: HomePage
+  let headerCmp: HeaderCmp
   // seed is used to generate random data and ensure that tests are repeatable
   // const SEED = 123
   // faker.seed(SEED)
 
   test.beforeEach(async ({ page }) => {
     registrationPage = new RegistrationPage(page)
+    homePage = new HomePage(page)
+    headerCmp = new HeaderCmp(page)
     await page.goto(ApplicationURL.BASE_URL)
-    await registrationPage.openHomePage()
-    await registrationPage.navigateTopMenu("My Account", "Register")
+    await homePage.openHomePage()
+    await headerCmp.navigateTopMenu("My Account", "Register")
   })
 
   test("Negative registration, Privacy Policy not checked", async () => {

@@ -5,14 +5,17 @@ import ApplicationURL from "../helpers/ApplicationURL"
 import CartPage from "../pages/CartPage"
 import CheckoutPage from "../pages/CheckoutPage"
 import { faker } from "@faker-js/faker"
+import HeaderCmp from "../components/HeaderCmp"
 
 test.describe("Sanity E2E Tests for OpenCart Demo Store", () => {
+  let headerCmp: HeaderCmp
   let homePage: HomePage
   let productCategoryPage: ProductCategoryPage
   let cartPage: CartPage
   let checkoutPage: CheckoutPage
 
   test.beforeEach(async ({ page }) => {
+    headerCmp = new HeaderCmp(page)
     homePage = new HomePage(page)
     productCategoryPage = new ProductCategoryPage(page)
     cartPage = new CartPage(page)
@@ -22,25 +25,25 @@ test.describe("Sanity E2E Tests for OpenCart Demo Store", () => {
 
   test("Complete E2E Sanity Check", async ({ page }) => {
     test.step("validate shopping cart count is empty", async () => {
-      await homePage.validateShoppingCartCount(0)
+      await headerCmp.validateShoppingCartCount(0)
     })
 
     test.step("add featured product to cart", async () => {
       await homePage.addFeaturedProductToCart("MacBook")
-      await homePage.validateAlertSuccessMessage("MacBook", "shopping cart")
+      await headerCmp.validateAlertSuccessMessage("MacBook", "shopping cart")
     })
 
     test.step("validate shopping cart count is 1", async () => {
-      await homePage.validateShoppingCartCount(1)
+      await headerCmp.validateShoppingCartCount(1)
     })
 
     test.step("open shopping cart modal and validate product added", async () => {
-      await homePage.clickToOpenShoppingCart()
-      await homePage.validateProductOnCartModal("MacBook")
+      await headerCmp.clickToOpenShoppingCart()
+      await headerCmp.validateProductOnCartModal("MacBook")
     })
 
     test.step("navigate to cart page from shopping cart modal", async () => {
-      await homePage.navigateToCartFromCartModal()
+      await headerCmp.navigateToCartFromCartModal()
       await cartPage.validatePageTitle("Shopping Cart")
     })
 
