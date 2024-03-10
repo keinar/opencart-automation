@@ -66,8 +66,8 @@ jobs:
         uses: actions/upload-artifact@v3
         if: always()
         with:
-          name: playwright-report-firefox
-          path: playwright-report/
+          name: allure-report-firefox
+          path: allure-report-firefox/
           retention-days: 30
       - name: Upload Allure Report as Artifact for Firefox
         uses: actions/upload-artifact@v3
