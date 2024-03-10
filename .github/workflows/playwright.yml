@@ -12,9 +12,9 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 60
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v2
       - name: Setup Node.js
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v2
         with:
           node-version: 18
           cache: "npm"
@@ -31,13 +31,13 @@ jobs:
       - name: Generate Allure Report
         run: npm run allure:generate
       - name: Archive Playwright Reports
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v2
         with:
           name: playwright-reports
           path: playwright-report/
           retention-days: 30
       - name: Archive Allure Report
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v2
         with:
           name: allure-report
           path: allure-report/
@@ -54,7 +54,7 @@ jobs:
         with:
           node-version: 18
       - name: Download Allure Report Artifact
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v2
         with:
           name: allure-report
           path: allure-report
