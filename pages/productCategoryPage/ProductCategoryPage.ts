@@ -1,5 +1,5 @@
 import { Locator, Page, expect } from "@playwright/test"
-import { BasePage } from "../BasePage"
+import { BasePage } from "../basePage/BasePage"
 import { locators } from "./ProductCategoryPageLocators"
 
 export default class ProductCategoryPage extends BasePage {

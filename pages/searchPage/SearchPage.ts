@@ -1,5 +1,5 @@
 import { Locator, Page } from "@playwright/test"
-import { BasePage } from "./BasePage"
+import { BasePage } from "../basePage/BasePage"
 
 export default class SearchPage extends BasePage {
   private searchCriteriaField: Locator

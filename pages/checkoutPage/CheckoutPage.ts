@@ -1,5 +1,5 @@
 import { Locator, Page } from "@playwright/test"
-import { BasePage } from "../BasePage"
+import { BasePage } from "../basePage/BasePage"
 import { locators } from "./CheckoutPageLocators"
 export default class CheckoutPage extends BasePage {
   private firstName: Locator

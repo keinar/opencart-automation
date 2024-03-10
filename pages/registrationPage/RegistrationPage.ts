@@ -1,5 +1,5 @@
 import { Locator, Page, expect } from "@playwright/test"
-import { BasePage } from "../BasePage"
+import { BasePage } from "../basePage/BasePage"
 
 export default class RegistrationPage extends BasePage {
   private firstName: Locator
