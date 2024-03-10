@@ -1,12 +1,13 @@
 import { Locator, Page, expect } from "@playwright/test"
-import { BasePage } from "./BasePage"
-import ApplicationURL from "../helpers/ApplicationURL"
+import ApplicationURL from "../../helpers/ApplicationURL"
+import { locators } from "./HomePageLocators"
+import { BasePage } from "../basePage/BasePage"
 
 export default class HomePage extends BasePage {
   private featuredProducts: Locator
   constructor(protected page: Page) {
     super(page)
-    this.featuredProducts = page.locator('[class="product-thumb"]')
+    this.featuredProducts = page.locator(locators.featuredProducts)
   }
 
   public async openHomePage() {

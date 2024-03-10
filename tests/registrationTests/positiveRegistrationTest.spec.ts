@@ -1,20 +1,21 @@
 import { test } from "@playwright/test"
-import RegistrationPage from "../../pages/RegistrationPage"
 import ApplicationURL from "../../helpers/ApplicationURL"
 import { faker } from "@faker-js/faker"
-import HomePage from "../../pages/HomePage"
-import HeaderCmp from "../../components/HeaderCmp"
+import HomePage from "../../pages/homePage/HomePage"
+import HeaderCmp from "../../components/headerCmp/HeaderCmp"
+import RegistrationPage from "../../pages/registrationPage/RegistrationPage"
+import { AlertPopupCmp } from "c:/Users/Keinar/Desktop/opencart-automation/components/alertPopupCmp/AlertPopupCmp"
+import MyAccountPage from "../../pages/myAccountPage/MyAccountPage"
 
 test.describe("Register to Application - positive scenario", () => {
   let registrationPage: RegistrationPage
   let homePage: HomePage
   let headerCmp: HeaderCmp
-  // seed is used to generate random data and ensure that tests are repeatable
-  // const SEED = 123
-  // faker.seed(SEED)
+  let myAccountPage: MyAccountPage
 
   test.beforeEach(async ({ page }) => {
     registrationPage = new RegistrationPage(page)
+    myAccountPage = new MyAccountPage(page)
     await page.goto(ApplicationURL.BASE_URL)
     await homePage.openHomePage()
     await headerCmp.navigateTopMenu("My Account", "Register")
@@ -24,6 +25,6 @@ test.describe("Register to Application - positive scenario", () => {
     await registrationPage.acceptNewsletterSubscription(true)
     await registrationPage.checkPrivacyPolicy()
     await registrationPage.submitRegistration()
-    await registrationPage.validatePageTitle("Your Account Has Been Created!")
+    await myAccountPage.validatePageTitle("Your Account Has Been Created!")
   })
 })

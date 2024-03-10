@@ -1,6 +1,6 @@
 import test from "@playwright/test"
-import HeaderCmp from "../../components/HeaderCmp"
-import HomePage from "../../pages/HomePage"
+import HomePage from "../../pages/homePage/HomePage"
+import HeaderCmp from "../../components/headerCmp/HeaderCmp"
 
 test.describe("Currency replacement", () => {
   let headerCmp: HeaderCmp

@@ -1,11 +1,13 @@
 import { test, expect } from "@playwright/test"
-import HomePage from "../pages/HomePage"
-import ProductCategoryPage from "../pages/ProductCategoryPage"
 import ApplicationURL from "../helpers/ApplicationURL"
-import CartPage from "../pages/CartPage"
-import CheckoutPage from "../pages/CheckoutPage"
 import { faker } from "@faker-js/faker"
-import HeaderCmp from "../components/HeaderCmp"
+import HeaderCmp from "../components/headerCmp/HeaderCmp"
+import HomePage from "../pages/homePage/HomePage"
+import ProductCategoryPage from "../pages/productCategoryPage/ProductCategoryPage"
+import CartPage from "../pages/cartPage/CartPage"
+import CheckoutPage from "../pages/checkoutPage/CheckoutPage"
+import ShoppingCartCmp from "../components/shoppingCartModalCmp/ShoppingCartCmp"
+import { AlertPopupCmp } from "../components/alertPopupCmp/AlertPopupCmp"
 
 test.describe("Sanity E2E Tests for OpenCart Demo Store", () => {
   let headerCmp: HeaderCmp
@@ -13,9 +15,13 @@ test.describe("Sanity E2E Tests for OpenCart Demo Store", () => {
   let productCategoryPage: ProductCategoryPage
   let cartPage: CartPage
   let checkoutPage: CheckoutPage
+  let shoppingCartCmp: ShoppingCartCmp
+  let alertPopupCmp: AlertPopupCmp
 
   test.beforeEach(async ({ page }) => {
     headerCmp = new HeaderCmp(page)
+    shoppingCartCmp = new ShoppingCartCmp(page)
+    alertPopupCmp = new AlertPopupCmp(page)
     homePage = new HomePage(page)
     productCategoryPage = new ProductCategoryPage(page)
     cartPage = new CartPage(page)
@@ -25,32 +31,32 @@ test.describe("Sanity E2E Tests for OpenCart Demo Store", () => {
 
   test("Complete E2E Sanity Check", async ({ page }) => {
     test.step("validate shopping cart count is empty", async () => {
-      await headerCmp.validateShoppingCartCount(0)
+      await shoppingCartCmp.validateShoppingCartCount(0)
     })
 
     test.step("add featured product to cart", async () => {
       await homePage.addFeaturedProductToCart("MacBook")
-      await headerCmp.validateAlertSuccessMessage("MacBook", "shopping cart")
+      await alertPopupCmp.validateAlertSuccessMessage("MacBook", "shopping cart")
     })
 
     test.step("validate shopping cart count is 1", async () => {
-      await headerCmp.validateShoppingCartCount(1)
+      await shoppingCartCmp.validateShoppingCartCount(1)
     })
 
     test.step("open shopping cart modal and validate product added", async () => {
-      await headerCmp.clickToOpenShoppingCart()
-      await headerCmp.validateProductOnCartModal("MacBook")
+      await shoppingCartCmp.clickToOpenShoppingCart()
+      await shoppingCartCmp.validateProductOnCartModal("MacBook")
     })
 
     test.step("navigate to cart page from shopping cart modal", async () => {
-      await headerCmp.navigateToCartFromCartModal()
-      await cartPage.validatePageTitle("Shopping Cart")
+      await shoppingCartCmp.navigateToCartFromCartModal()
+      await shoppingCartCmp.validatePageTitle("Shopping Cart")
     })
 
     test.step("validate product on cart page and proceed to checkout", async () => {
       await cartPage.validateProductOnCartTable("MacBook")
       await cartPage.clickProcceedToCheckoutButton()
-      await checkoutPage.validatePageTitle("Checkout")
+      await shoppingCartCmp.validatePageTitle("Checkout")
     })
 
     test.step("fill checkout form", async () => {
@@ -58,7 +64,7 @@ test.describe("Sanity E2E Tests for OpenCart Demo Store", () => {
       await checkoutPage.clickSubmitAddressButton()
       await checkoutPage.selectPaymentMethod("Bank Transfer")
       await checkoutPage.clickConfirmPaymentButton()
-      await checkoutPage.validatePageTitle("Order Confirmation")
+      await shoppingCartCmp.validatePageTitle("Order Confirmation")
     })
   })
 })

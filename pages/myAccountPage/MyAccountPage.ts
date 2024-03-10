@@ -1,5 +1,6 @@
 import { Locator, Page, expect } from "@playwright/test"
-import { BasePage } from "./BasePage"
+import { locators } from "./MyAccountPageLocarors"
+import { BasePage } from "../basePage/BasePage"
 
 export default class MyAccountPage extends BasePage {
   private usernameField: Locator
@@ -9,10 +10,10 @@ export default class MyAccountPage extends BasePage {
 
   constructor(protected page: Page) {
     super(page)
-    this.usernameField = page.locator('[id="input-email"]')
-    this.passwordField = page.locator('[id="input-password"]')
-    this.loginButton = page.locator('[type="submit"]:has-text("Login")')
-    this.registerButton = page.locator('[class="btn btn-primary"]:has-text("Continue")')
+    this.usernameField = page.locator(locators.usernameField)
+    this.passwordField = page.locator(locators.passwordField)
+    this.loginButton = page.locator(locators.loginButton)
+    this.registerButton = page.locator(locators.registerButton)
   }
 
   public async loginToApplication(username: string, Password: string) {

@@ -1,19 +1,18 @@
 import { test } from "@playwright/test"
-import MyAccountPage from "../../pages/MyAccountPage"
-import HomePage from "../../pages/HomePage"
 import ApplicationURL from "../../helpers/ApplicationURL"
 import AlertErrorMessage from "../../helpers/AlertErrorMessage"
-import HeaderCmp from "../../components/HeaderCmp"
+import HomePage from "../../pages/homePage/HomePage"
+import HeaderCmp from "../../components/headerCmp/HeaderCmp"
+import MyAccountPage from "../../pages/myAccountPage/MyAccountPage"
 
 test.describe("Login to Application scenario", () => {
-  let myAccountPage: MyAccountPage
   let homePage: HomePage
   let headerCmp: HeaderCmp
-
+  let myAccountPage: MyAccountPage
   test.beforeEach(async ({ page }) => {
-    myAccountPage = new MyAccountPage(page)
     homePage = new HomePage(page)
     headerCmp = new HeaderCmp(page)
+    myAccountPage = new MyAccountPage(page)
     await page.goto(ApplicationURL.BASE_URL)
     await homePage.openHomePage()
   })

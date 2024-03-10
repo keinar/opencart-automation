@@ -1,8 +1,8 @@
 import { test } from "@playwright/test"
-import MyAccountPage from "../../pages/MyAccountPage"
 import ApplicationURL from "../../helpers/ApplicationURL"
-import HomePage from "../../pages/HomePage"
-import HeaderCmp from "../../components/HeaderCmp"
+import HomePage from "../../pages/homePage/HomePage"
+import HeaderCmp from "../../components/headerCmp/HeaderCmp"
+import MyAccountPage from "../../pages/myAccountPage/MyAccountPage"
 
 test.describe("Login to Application scenario", () => {
   let myAccountPage: MyAccountPage

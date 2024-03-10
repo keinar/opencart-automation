@@ -1,5 +1,6 @@
 import { Locator, Page, expect } from "@playwright/test"
-import { BasePage } from "./BasePage"
+import { BasePage } from "../BasePage"
+import { locators } from "./ProductCategoryPageLocators"
 
 export default class ProductCategoryPage extends BasePage {
   private asideMenuContainer: Locator
@@ -7,8 +8,8 @@ export default class ProductCategoryPage extends BasePage {
 
   constructor(protected page: Page) {
     super(page)
-    this.asideMenuContainer = page.locator('[id="column-left"]')
-    this.categoryTitle = page.locator('[id="content"] h2')
+    this.asideMenuContainer = page.locator(locators.asideMenuContainer)
+    this.categoryTitle = page.locator(locators.categoryTitle)
   }
 
   public async navigateFromAsideMenu(mainCategory: string, subcategory?: string) {
