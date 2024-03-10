@@ -1,11 +1,14 @@
 name: Playwright Tests
+
 on:
   push:
     branches: [main, master]
   pull_request:
     branches: [main, master]
+
 jobs:
-  test:
+  test-chrome:
+    name: Run Playwright Tests on Chrome
     timeout-minutes: 60
     runs-on: ubuntu-latest
     steps:
@@ -17,27 +20,59 @@ jobs:
         run: npm ci
       - name: Install Playwright Browsers
         run: npx playwright install --with-deps
-      - name: Run Playwright tests
-        run: npx playwright test
+      - name: Run Playwright tests on Chrome
+        run: npx playwright test --project=chromium
         env:
           CORRECT_EMAIL_ADDRESS: ${{vars.CORRECT_EMAIL_ADDRESS}}
           CORRECT_PASSWORD: ${{vars.CORRECT_PASSWORD}}
-
-      - name: Generate Allure Report
-        run: allure generate allure-results --clean -o allure-report
-
-      - name: Upload Playwright Report as Artifact
+      - name: Generate Allure Report for Chrome
+        run: allure generate allure-results --clean -o allure-report-chrome
+      - name: Upload Playwright Report as Artifact for Chrome
         uses: actions/upload-artifact@v3
         if: always()
         with:
-          name: playwright-report
+          name: playwright-report-chrome
           path: playwright-report/
           retention-days: 30
-
-      - name: Upload Allure Report as Artifact
+      - name: Upload Allure Report as Artifact for Chrome
         uses: actions/upload-artifact@v3
         if: always()
         with:
-          name: allure-report
-          path: allure-report/
+          name: allure-report-chrome
+          path: allure-report-chrome/
+          retention-days: 30
+
+  test-firefox:
+    name: Run Playwright Tests on Firefox
+    timeout-minutes: 60
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 18
+      - name: Install dependencies
+        run: npm ci
+      - name: Install Playwright Browsers
+        run: npx playwright install --with-deps
+      - name: Run Playwright tests on Firefox
+        run: npx playwright test --project=firefox
+        env:
+          CORRECT_EMAIL_ADDRESS: ${{vars.CORRECT_EMAIL_ADDRESS}}
+          CORRECT_PASSWORD: ${{vars.CORRECT_PASSWORD}}
+      - name: Generate Allure Report for Firefox
+        run: allure generate allure-results --clean -o allure-report-firefox
+      - name: Upload Playwright Report as Artifact for Firefox
+        uses: actions/upload-artifact@v3
+        if: always()
+        with:
+          name: playwright-report-firefox
+          path: playwright-report/
+          retention-days: 30
+      - name: Upload Allure Report as Artifact for Firefox
+        uses: actions/upload-artifact@v3
+        if: always()
+        with:
+          name: allure-report-firefox
+          path: allure-report-firefox/
           retention-days: 30
