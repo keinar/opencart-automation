@@ -22,12 +22,14 @@ test.describe("Search for products", () => {
   test("Search for products", { tag: ["@critical-bug"] }, async ({ page }) => {
     test.step("Search for product from header", async () => {
       await headerCmp.searchTextFromHeader("MacBook")
+      await searchPage.validatePageTitle("Search")
     })
   })
 
   test("Empty search", async ({ page }) => {
     test.step("Search for product from header", async () => {
       await headerCmp.searchTextFromHeader("")
+      await searchPage.validatePageTitle("Search")
     })
   })
 })
