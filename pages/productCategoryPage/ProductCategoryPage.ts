@@ -5,11 +5,13 @@ import { locators } from "./ProductCategoryPageLocators"
 export default class ProductCategoryPage extends BasePage {
   private asideMenuContainer: Locator
   private categoryTitle: Locator
+  private productThumbnail: Locator
 
   constructor(protected page: Page) {
     super(page)
     this.asideMenuContainer = page.locator(locators.asideMenuContainer)
     this.categoryTitle = page.locator(locators.categoryTitle)
+    this.productThumbnail = page.locator(locators.productThumbnail)
   }
 
   public async navigateFromAsideMenu(mainCategory: string, subcategory?: string) {
@@ -24,16 +26,8 @@ export default class ProductCategoryPage extends BasePage {
     }
   }
 
-  //sorting filters
-  public async sortByFilter(filter: string) {}
-
-  //pagination
-  public async goToNextPage() {}
-
-  //showing products list / grid view
-  public async changeView(view: string) {}
-
-  // add to cart / add to wish list / compare buttons
-
-  // product item
+  public async addProductToCart(productTitle: string) {
+    const product = this.productThumbnail.locator(`h4:has-text("${productTitle}")`)
+    this.clickElement(product)
+  }
 }

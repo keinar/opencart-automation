@@ -1,5 +1,6 @@
 import { Locator, Page } from "@playwright/test"
 import { BasePage } from "../basePage/BasePage"
+import { locators } from "./SearchPageLocators"
 
 export default class SearchPage extends BasePage {
   private searchCriteriaField: Locator
@@ -10,11 +11,11 @@ export default class SearchPage extends BasePage {
 
   constructor(protected page: Page) {
     super(page)
-    this.searchCriteriaField = page.locator('[id="input-search"]')
-    this.categorySearchDropdown = page.locator('[id="input-category"]')
-    this.searchByDescriptionCheckbox = page.locator('[name="description"]')
-    this.searchByDescriptionCheckbox = page.locator('[name="subcategories"]')
-    this.searchButtonSubmit = page.locator('[id="button-search"]')
+    this.searchCriteriaField = page.locator(locators.searchCriteriaField)
+    this.categorySearchDropdown = page.locator(locators.categorySearchDropdown)
+    this.searchByDescriptionCheckbox = page.locator(locators.searchByDescriptionCheckbox)
+    this.searchByDescriptionCheckbox = page.locator(locators.searchBySubcategoryCheckbox)
+    this.searchButtonSubmit = page.locator(locators.searchButtonSubmit)
   }
 
   public async searchCriteria(textToFill: string) {
