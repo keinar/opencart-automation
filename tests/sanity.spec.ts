@@ -9,7 +9,7 @@ import CheckoutPage from "../pages/checkoutPage/CheckoutPage"
 import ShoppingCartCmp from "../components/shoppingCartModalCmp/ShoppingCartCmp"
 import { AlertPopupCmp } from "../components/alertPopupCmp/AlertPopupCmp"
 
-test.describe("Sanity E2E Tests for OpenCart Demo Store", () => {
+test.describe("Sanity E2E Tests for OpenCart Demo Store", { tag: "@sanity" }, () => {
   let headerCmp: HeaderCmp
   let homePage: HomePage
   let productCategoryPage: ProductCategoryPage
