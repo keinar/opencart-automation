@@ -51,11 +51,17 @@ npx playwright test
 ```
 6. Generate the Allure report:
 ```
-allure:generate
+npm run allure:generate
 ```
 
-7. Deploy the Allure report to GitHub Pages:
-- Ensure GitHub Actions is set up for your project to automatically deploy the reports upon test completion.
+7. Open the Allure report:
+```
+npm run allure:open
+```
+
+8. Deploy the Allure report to GitHub Pages:
+- Commit and push your tests and automatically deploy the reports upon test completion on CI.
+- open this like to see the allure report results: https://keinar.github.io/opencart-automation/
 
 ## Project Structure
 
