@@ -1,5 +1,3 @@
-import { Locator } from "@playwright/test"
-
 type Locators = {
   usernameField: string
   passwordField: string

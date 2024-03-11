@@ -1,5 +1,6 @@
 import { Locator, Page, expect } from "@playwright/test"
 import { BasePage } from "../basePage/BasePage"
+import { locators } from "./RegistrationPageLocators"
 
 export default class RegistrationPage extends BasePage {
   private firstName: Locator
@@ -13,14 +14,14 @@ export default class RegistrationPage extends BasePage {
 
   constructor(protected page: Page) {
     super(page)
-    this.firstName = page.locator('[name="firstname"]')
-    this.lastName = page.locator('[name="lastname"]')
-    this.email = page.locator('[name="email"]')
-    this.password = page.locator('[name="password"]')
-    this.confirmSubscription = page.locator('[id="input-newsletter-yes"]')
-    this.privacyPolicy = page.locator('[name="agree"]')
-    this.submitButton = page.locator('[type="submit"]:has-text("Continue")')
-    this.validationFieldError = page.locator('[class="invalid-feedback d-block"]')
+    this.firstName = page.locator(locators.firstName)
+    this.lastName = page.locator(locators.lastName)
+    this.email = page.locator(locators.email)
+    this.password = page.locator(locators.password)
+    this.confirmSubscription = page.locator(locators.confirmSubscription)
+    this.privacyPolicy = page.locator(locators.privacyPolicy)
+    this.submitButton = page.locator(locators.submitButton)
+    this.validationFieldError = page.locator(locators.validationFieldError)
   }
 
   public async registerToApplication(firstname: string, lastname: string, email: string, password: string) {
