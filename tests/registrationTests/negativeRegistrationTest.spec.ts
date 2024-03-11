@@ -6,18 +6,21 @@ import HomePage from "../../pages/homePage/HomePage"
 import HeaderCmp from "../../components/headerCmp/HeaderCmp"
 import RegistrationPage from "../../pages/registrationPage/RegistrationPage"
 import MyAccountPage from "../../pages/myAccountPage/MyAccountPage"
+import { AlertPopupCmp } from "../../components/alertPopupCmp/AlertPopupCmp"
 
 test.describe("Register to Application - negative scenarios", () => {
   let registrationPage: RegistrationPage
   let homePage: HomePage
   let headerCmp: HeaderCmp
   let myAccountPage: MyAccountPage
+  let alertPopupCmp: AlertPopupCmp
 
   test.beforeEach(async ({ page }) => {
     registrationPage = new RegistrationPage(page)
     homePage = new HomePage(page)
     headerCmp = new HeaderCmp(page)
     myAccountPage = new MyAccountPage(page)
+    alertPopupCmp = new AlertPopupCmp(page)
     await page.goto(ApplicationURL.BASE_URL)
     await homePage.openHomePage()
     await headerCmp.navigateTopMenu("My Account", "Register")
@@ -27,7 +30,7 @@ test.describe("Register to Application - negative scenarios", () => {
     await registrationPage.registerToApplication(faker.person.firstName(), faker.person.lastName(), faker.internet.email(), faker.internet.password())
     await registrationPage.acceptNewsletterSubscription(true)
     await registrationPage.submitRegistration()
-    await myAccountPage.validateAlertWarningMessage(FieldErrorMessage.PRIVACY_POLICY_VALIDATION)
+    await alertPopupCmp.validateAlertWarningMessage(FieldErrorMessage.PRIVACY_POLICY_VALIDATION)
   })
 
   test("Negative registration, invalid email", async () => {
