@@ -6,7 +6,9 @@
   "scripts": {
     "allure:generate": "npx allure generate ./allure-results --clean",
     "allure:open": "npx allure open ./allure-report",
-    "test": "npx playwright test || :",
+    "test:chromium": "playwright test --project=chromium",
+    "test:firefox": "playwright test --project=firefox",
+    "test:sequential": "npm run test:chromium && npm run test:firefox",
     "posttest": "npm run allure:generate"
   },
   "repository": {
