@@ -31,6 +31,5 @@ test.describe("Filter by categories", () => {
     // await homePage.validatePageTitle("Mac")
     await productThumbnail.addProductToCart("IMac")
     // await productPage.validatePageTitle("IMac")
-    await productPage.addToCart()
   })
 })
