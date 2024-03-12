@@ -34,8 +34,8 @@ export abstract class BasePage {
 
   protected async clickElement(element: Locator) {
     await test.step(`Clicking the '${element}' element`, async () => {
-      await element.scrollIntoViewIfNeeded()
       await element.waitFor({ state: "visible" })
+      await element.scrollIntoViewIfNeeded()
       await element.click()
     })
   }

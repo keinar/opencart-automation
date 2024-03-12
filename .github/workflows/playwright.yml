@@ -29,14 +29,17 @@ jobs:
           CORRECT_EMAIL_ADDRESS: ${{ secrets.CORRECT_EMAIL_ADDRESS }}
           CORRECT_PASSWORD: ${{ secrets.CORRECT_PASSWORD }}
       - name: Generate Allure Report for Chromium
+        if: always()
         run: npm run allure:generate
       - name: Archive Playwright Reports for Chromium
+        if: always()
         uses: actions/upload-artifact@v2
         with:
           name: playwright-reports-chromium
           path: playwright-report/
           retention-days: 30
       - name: Archive Allure Report for Chromium
+        if: always()
         uses: actions/upload-artifact@v2
         with:
           name: allure-report-chromium
