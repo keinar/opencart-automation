@@ -9,21 +9,18 @@ test.describe("Currency replacement", () => {
   test.beforeEach(async ({ page }) => {
     headerCmp = new HeaderCmp(page)
     homePage = new HomePage(page)
-    await headerCmp.handleVerificationPage()
     await homePage.openHomePage()
   })
 
-  test("Select currency from dropdown", async ({ page }) => {
-    test.step("Select Pound currency", async () => {
-      await headerCmp.selectCurrency("£ Pound Sterling")
-    })
+  test("Select Pound currency", async ({ page }) => {
+    await headerCmp.selectCurrency("£ Pound Sterling")
+  })
 
-    test.step("Select US Dollar currency", async () => {
-      await headerCmp.selectCurrency("$ US Dollar")
-    })
+  test("Select Euro currency", async ({ page }) => {
+    await headerCmp.selectCurrency("€ Euro")
+  })
 
-    test.step("Select Euro currency", async () => {
-      await headerCmp.selectCurrency("€ Euro")
-    })
+  test("Select Dollar currency", async ({ page }) => {
+    await headerCmp.selectCurrency("$ US Dollar")
   })
 })
