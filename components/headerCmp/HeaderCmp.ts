@@ -40,6 +40,7 @@ export default class HeaderCmp extends BasePage {
   }
 
   public async selectCurrency(currency: "€ Euro" | "£ Pound Sterling" | "$ US Dollar") {
+    await this.page.locator('[id="form-currency"]').waitFor({ state: "visible" })
     await this.clickElement(this.page.locator('[id="form-currency"]'))
     await this.clickElement(this.page.locator(`[class="dropdown-menu show"] li a:has-text("${currency}")`))
   }
