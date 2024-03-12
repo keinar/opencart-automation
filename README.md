@@ -63,6 +63,39 @@ npm run allure:open
 - Commit and push your tests and automatically deploy the reports upon test completion on CI.
 - open this like to see the allure report results: https://keinar.github.io/opencart-automation/
 
+## Running Tests locally
+To run your tests locally, you can use several different commands depending on which browser you wish to test with or if you want to run tests sequentially across multiple browsers.
+
+## Running Tests in Chromium (Chrome)
+To run tests specifically in Chromium (Chrome), use the following command:
+
+```
+npm run test:chromium
+```
+
+This command utilizes Playwright to execute tests in a Chromium browser environment, allowing you to test Chrome-specific behaviors.
+
+## Running Tests in Firefox
+To run tests specifically in Firefox, use the following command:
+
+```
+npm run test:firefox
+```
+
+This command tells Playwright to execute your test suite in Firefox, enabling you to validate Firefox-specific functionalities.
+
+## Running Tests Sequentially Across Browsers
+If you wish to run your tests sequentially across both Chromium and Firefox to ensure cross-browser compatibility, use the following command:
+
+```
+npm run test:sequential
+```
+This command first runs all tests in Chromium and, upon completion, runs them again in Firefox. It's a comprehensive way to validate your OpenCart installation's behavior across these two major browsers.
+
+## Generating and Viewing Test Reports
+After running your tests, generate and view detailed test reports using Allure with the above commands in steps  6-7
+These reports provide a detailed overview of your tests, including which tests passed, failed, and any associated screenshots or logs for debugging purposes.
+
 ## Project Structure
 
 - **.github/workflows**: Contains GitHub action workflows for CI/CD integration and deploying reports to GitHub Pages.
