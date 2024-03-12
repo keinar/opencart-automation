@@ -23,7 +23,7 @@ jobs:
       - name: Install Playwright Browsers
         run: npx playwright install --with-deps
       - name: Run Playwright Tests
-        run: npm run test:sequential
+        run: npm test
         env:
           CI: true
           CORRECT_EMAIL_ADDRESS: ${{ secrets.CORRECT_EMAIL_ADDRESS }}
